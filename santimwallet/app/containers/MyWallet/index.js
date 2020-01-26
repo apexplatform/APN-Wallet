@@ -205,17 +205,17 @@ export class MyWallet extends React.Component {
     if (amount === '' || sender_account === '' || reciver_account === ''){
       toast.error("Please give a valid info!")
     } else {
+
       ShardusCryptoUtils.generateKeyPair().then(function(keypair) {
 
-	let tx = ShardusCryptoUtils.buildTx({
+	    let tx = ShardusCryptoUtils.buildTx({
         type: "transfer",
         from: { ...sender_account, keys: keypair },
         to: { id: "02669890c60742590353d8af33cbcd1533c517e559d4ed8b0951f0a005b8e6f0" },
         amount
       });
       ShardusCryptoUtils.send(ShardusCryptoUtils.getServerUrlAddress(),tx)
-	})
-
+	    })
       this.setState({
         mcModalOpen: false,
         sender_account: '',
