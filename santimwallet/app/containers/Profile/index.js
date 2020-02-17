@@ -30,6 +30,7 @@ import messages from './messages';
 import Image from '../../components/uiStyle/Images';
 
 import UserImage from '../../images/author/user-image-big.jpg';
+import cookie from 'js-cookie';
 
 import './style.scss';
 
@@ -43,6 +44,8 @@ const styles = theme => ({
 /* eslint-disable react/prefer-stateless-function */
 export class Profile extends React.Component {
   render() {
+   
+    let userProfile = JSON.parse(cookie.get(cookie.get('userEmail')));
     const { classes } = this.props;
     return (
       <Grid>
@@ -51,8 +54,8 @@ export class Profile extends React.Component {
             <Grid className="userThumb">
               <Image src={UserImage} />
             </Grid>
-            <Typography component="h5">Naoll Addisu</Typography>
-            <Typography component="p">naoll@afpaynetwork.org</Typography>
+            <Typography component="h5">{userProfile.FirstName} {userProfile.LastName}</Typography>
+            <Typography component="p">{userProfile.email}</Typography>
             <Typography component="p">United States</Typography>
           </Grid>
           <Grid item sm={8} xs={12} className="userInfo">
@@ -66,7 +69,7 @@ export class Profile extends React.Component {
                   </TableCell>
 
                   <TableCell>
-                    <strong>Naoll Addisu</strong>
+                    <strong>{userProfile.firstName} {userProfile.lastName}</strong>
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -88,7 +91,7 @@ export class Profile extends React.Component {
                   </TableCell>
 
                   <TableCell>
-                    <strong>naoll@afpaynetwork.org</strong>
+                    <strong>{userProfile.email}</strong>
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -110,7 +113,7 @@ export class Profile extends React.Component {
                   </TableCell>
 
                   <TableCell>
-                    <strong>+0123456789</strong>
+                    <strong>{userProfile.phoneNumber}</strong>
                   </TableCell>
                 </TableRow>
                 <TableRow>

@@ -24,6 +24,7 @@ import Input from '@material-ui/core/Input';
 import messages from './messages';
 import Form from '../uiStyle/Form';
 import FontAwesome from '../uiStyle/FontAwesome';
+import cookie from 'js-cookie';
 
 function MoveCoin({
   mcModalOpen,
@@ -34,6 +35,7 @@ function MoveCoin({
   mcModalCloseHandler,
   mcSubmitHandler,
 }) {
+  let userProfile = JSON.parse(cookie.get(cookie.get('userEmail')));
   return (
     <Dialog
       open={mcModalOpen}
@@ -92,7 +94,7 @@ function MoveCoin({
                 <MenuItem value="">
                   <em>Select reciver Account</em>
                 </MenuItem>
-                <MenuItem value="rashed">NaollA</MenuItem>
+                <MenuItem value="rashed">{userProfile.firstName} {userProfile.fastName}</MenuItem>
                 <MenuItem value="rashed01">Naoll-2</MenuItem>
               </Select>
             </FormControl>

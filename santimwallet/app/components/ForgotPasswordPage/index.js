@@ -108,7 +108,7 @@ class ForgotPasswordPage extends Component {
           <Grid className="container" container>
             <Grid item lg={6} xs={12}>
               <Grid className="accountImage">
-                <Image src={logo} alt="logo" />
+                
                 <p>Store and manage digital currencies with ease in the smart and beautiful cryptocurrency wallets.</p>
               </Grid>
             </Grid>

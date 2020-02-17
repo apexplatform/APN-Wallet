@@ -26,6 +26,7 @@ import Pass from '../../images/icon/eye2.svg';
 
 import '../SignupPage/account.scss';
 import { toast } from 'react-toastify';
+import ShardusCryptoUtils from '../../Shardus/utils/cryptoUtils';
 
 class LoginPage extends Component {
   state = {
@@ -101,7 +102,29 @@ class LoginPage extends Component {
       password: this.state.password,
     };
     const { error } = Joi.validate(form, this.schema, options);
-    if (!error) return null;
+    if (!error) {
+      //Fetch wallet address and store it in a kookie 
+      cookie.set('userEmail',this.state.email);
+      let userProfile = cookie.get(cookie.get('userEmail'));
+      let userPass = this.state.password;
+      if(!userProfile){
+      ShardusCryptoUtils.generateKeyPair().then(function(keypair) {
+        const walletUserObject = {
+          firstName: 'NoName',
+          lastName: 'NoLastName',
+          email: userEmailAdd,
+          password: userPass,
+          phoneNumber:'',
+          walletAddress:keypair.publicKey,
+          walletKey:keypair.secretKey, 
+          keypair:keypair,
+        };
+
+        cookie.set(userEmailAdd,walletUserObject);
+      });
+    };
+      return null
+    };
 
     const errors = {};
     for (const item of error.details) errors[item.path[0]] = item.message;
@@ -137,7 +160,7 @@ class LoginPage extends Component {
           <Grid className="container" container>
             <Grid item lg={6} xs={12}>
               <Grid className="accountImage">
-              <Image src={Logo} alt="logo" />
+             
                 <p>
                   Store and manage digital currencies with ease in the smart and
                   beautiful cryptocurrency wallets.

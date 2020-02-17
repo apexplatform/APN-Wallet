@@ -47,6 +47,7 @@ import TransactionsByBitCoin from '../../components/TransactionsByBitCoin';
 import Image from '../../components/uiStyle/Images';
 import BuyCoinByQr from '../../components/BuyCoinByQr';
 import { toast } from 'react-toastify';
+import cookie from 'js-cookie';
 
 const styles = theme => ({
   root: {
@@ -251,6 +252,10 @@ export class BuyCoin extends React.Component {
   };
 
   render() {
+  
+    
+    let userProfile = JSON.parse(cookie.get(cookie.get('userEmail')));
+    
     const { classes } = this.props;
 
     const {
@@ -394,7 +399,7 @@ export class BuyCoin extends React.Component {
           <ListItem>
             Account Name
             <Typography component="p">
-              <span>:</span> Naoll Addisu
+              <span>:</span> {userProfile.firstName} {userProfile.lastName}
             </Typography>
           </ListItem>
           <ListItem>

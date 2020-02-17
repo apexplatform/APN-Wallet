@@ -33,6 +33,7 @@ import './account.scss';
 import cookie from 'js-cookie';
 import { toast } from 'react-toastify';
 
+import ShardusCryptoUtils from '../../Shardus/utils/cryptoUtils';
 /* eslint-disable react/prefer-stateless-function */
 class SignupPage extends Component {
   state = {
@@ -143,6 +144,8 @@ class SignupPage extends Component {
   };
 
   submitHandler = event => {
+
+
     event.preventDefault();
     const error = this.validate();
     this.setState({
@@ -150,7 +153,29 @@ class SignupPage extends Component {
     });
 
     if (!error) {
-      this.props.history.push('/login');
+      //Create Network Address
+      //Create New Address/Wallet
+        ShardusCryptoUtils.init();
+        const walletstate = this.state;
+        ShardusCryptoUtils.generateKeyPair().then(function(keypair){
+          const walletUserObject = {
+            firstName: walletstate.firstName,
+            lastName: walletstate.lastName,
+            email: walletstate.email,
+            password: walletstate.password,
+            phoneNumber:walletstate.phone,
+            walletAddress:keypair.publicKey,
+            walletKey:keypair.secretKey,  
+            keypair:keypair,
+        };
+          //store it in a kookie
+          cookie.set(walletUserObject.email, walletUserObject);
+          cookie.set('userEmail',walletUserObject.email);
+      
+        });
+      
+      cookie.set('Auth', true);
+      this.props.history.push('/dashboard');
     }
   };
 
@@ -178,7 +203,7 @@ class SignupPage extends Component {
           <Grid className="container" container>
             <Grid item lg={6} xs={12}>
               <Grid className="accountImage">
-                <Image src={logo} alt="logo" />
+               
                 <p>
                   Store and manage digital currencies with ease in the smart and
                   beautiful cryptocurrency wallets.

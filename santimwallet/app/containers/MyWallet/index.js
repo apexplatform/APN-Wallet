@@ -3,7 +3,7 @@
  * MyWallet
  *
  */
-
+import cookie from 'js-cookie';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -206,16 +206,19 @@ export class MyWallet extends React.Component {
       toast.error("Please give a valid info!")
     } else {
 
-      ShardusCryptoUtils.generateKeyPair().then(function(keypair) {
 
+   
+    
+      let userProfile = JSON.parse(cookie.get(cookie.get('userEmail')));
 	    let tx = ShardusCryptoUtils.buildTx({
         type: "transfer",
-        from: { ...sender_account, keys: keypair },
-        to: { id: "02669890c60742590353d8af33cbcd1533c517e559d4ed8b0951f0a005b8e6f0" },
+        from: { ...userProfile.walletAddress, keys: userProfile.keypair },
+        to: { id: '00000000000087890000000000000000078960000000000'},
         amount
       });
+      
       ShardusCryptoUtils.send(ShardusCryptoUtils.getServerUrlAddress(),tx)
-	    })
+	
       this.setState({
         mcModalOpen: false,
         sender_account: '',

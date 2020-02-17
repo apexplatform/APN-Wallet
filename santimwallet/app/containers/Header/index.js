@@ -84,6 +84,9 @@ export class Header extends React.Component {
   };
 
   render() {
+    const userEmail = cookie.get('userEmail');
+    
+    let userProfile = JSON.parse(cookie.get(userEmail));
     const { anchorEl, open, placement, sideMenu } = this.state;
     const Auth = cookie.get('Auth');
     if (!Auth) {
@@ -133,7 +136,7 @@ export class Header extends React.Component {
                     <Image src={UserDefaultImage} />
                   </Typography>
                   <Typography className="userName" component="span">
-                    Naoll Addisu
+                    {userProfile.firstName} {userProfile.lastName}
                   </Typography>
                   <FontAwesome name={!open ? 'caret-down' : 'caret-up'} />
                 </Button>

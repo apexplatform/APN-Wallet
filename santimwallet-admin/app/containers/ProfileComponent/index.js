@@ -16,6 +16,7 @@ import edit from 'images/icon/eidt2.svg'
 import resetPass from 'images/icon/reset-pass.svg'
 import avatar from 'images/user/user1.jpg'
 import camera from 'images/icon/camera.svg'
+import cookie from 'js-cookie'
 
 const suggestions = [
     { label: 'Afghanistan' },
@@ -174,6 +175,9 @@ class ProfileComponent extends Component {
     }
 
     render() {
+     
+    
+        let userProfile = JSON.parse(cookie.get(cookie.get('userEmail')));
         const { value } = this.state
         return (
             <Fragment>
@@ -214,8 +218,8 @@ class ProfileComponent extends Component {
                             <Grid item lg={5} xs={12}>
                                 <Grid className="profileImage">
                                     <img src={avatar} alt="" />
-                                    <h2>Naoll Addisu</h2>
-                                    <p>jon.doe@gmail.com</p>
+                    <h2>{userProfile.firstName} {userProfile.lastName}</h2>
+                    <p>{userProfile.email}</p>
                                     <span>United State</span>
                                 </Grid>
                             </Grid>

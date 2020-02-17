@@ -30,6 +30,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 import { EditProfile } from '../EditProfile';
 import { toast } from 'react-toastify';
+import cookie from 'js-cookie';
 
 const styles = theme => ({
   root: {
@@ -161,6 +162,8 @@ export class PhoneVarification extends React.Component {
   };
 
   render() {
+    let userProfile = JSON.parse(cookie.get(cookie.get('userEmail')));
+    this.state.phone = userProfile.phoneNumber;
     const { phone, id1, id2, id3, id4, mvalidation } = this.state;
 
     const { classes } = this.props;

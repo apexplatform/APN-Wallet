@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import cookie from 'js-cookie';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -33,11 +34,14 @@ import WalletActivityTable from '../../components/WalletActivityTable';
 import './style.scss';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import ShardusCryptoUtils from '../../Shardus/utils/cryptoUtils'; 
+
+
 
 const DepositeRow = [
   {
     id: 1,
-    address: '2NCzoqbY7CXitVwwiNDq9MqvjDJV4DcBj3Q',
+    address: 'APN-Test',
     amount: '12.654',
     hash: '2NCzoqbY7CXitVwwiNDq9MqvjDJV4DcBj3Q',
     updated_at: '2019-01-24  12:50:17',
@@ -82,6 +86,18 @@ const WithdrawRow = [
   },
 ];
 
+
+
+function getTransactionHistory(){
+      //Get the accountid from the cookie
+
+      let userProfile = JSON.parse(cookie.get(cookie.get('userEmail')));
+  
+      ShardusCryptoUtils.getHistory(ShardusCryptoUtils.getServerUrlAddress(),userProfile.walletAddress).then(function(transactionHistory){
+        WithdrawRow = transactionHistory;
+      });
+};
+
 /* eslint-disable react/prefer-stateless-function */
 export class SingleWalletActivity extends React.Component {
   state = {
@@ -96,7 +112,7 @@ export class SingleWalletActivity extends React.Component {
   };
 
   paginateDepositeHandler = prop => event => {
-    this.setState({
+     this.setState({
       currentPage: Number(event.target.id),
       pageNumberOfPage: prop,
     });
@@ -114,6 +130,7 @@ export class SingleWalletActivity extends React.Component {
   };
 
   render() {
+    getTransactionHistory();
     const {
       deposite_row,
       currentPage,

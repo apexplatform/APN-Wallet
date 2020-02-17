@@ -30,6 +30,7 @@ import './style.scss';
 import Form from '../../components/uiStyle/Form';
 import { Profile } from '../Profile';
 import { toast } from 'react-toastify';
+import cookie from 'js-cookie';
 
 const styles = theme => ({
   root: {
@@ -43,9 +44,9 @@ export class EditProfile extends React.Component {
   state = {
     files: null,
     imagesPreviewUrl: null,
-    first_name: 'Rashedul',
-    last_name: 'islam',
-    email: 'irashad42@gmail.com',
+    first_name: '',
+    last_name: '',
+    email: '',
     error: {},
   };
 
@@ -143,6 +144,10 @@ export class EditProfile extends React.Component {
   };
 
   render() {
+    let userProfile = JSON.parse(cookie.get(cookie.get('userEmail')));
+    this.state.first_name = userProfile.firstName;
+    this.state.last_name = userProfile.lastName;
+    this.state.email = userProfile.email;
     const {
       imagesPreviewUrl,
       first_name,
