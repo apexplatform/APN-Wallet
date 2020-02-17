@@ -175,7 +175,7 @@ class SignupPage extends Component {
         });
       
       cookie.set('Auth', true);
-      this.props.history.push('/dashboard');
+      return <Redirect to="/dashboard" />;
     }
   };
 

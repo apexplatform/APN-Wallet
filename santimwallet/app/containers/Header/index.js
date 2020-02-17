@@ -84,9 +84,9 @@ export class Header extends React.Component {
   };
 
   render() {
-    const userEmail = cookie.get('userEmail');
+ 
     
-    let userProfile = JSON.parse(cookie.get(userEmail));
+    let userProfile = JSON.parse(cookie.get(cookie.get('userEmail')));
     const { anchorEl, open, placement, sideMenu } = this.state;
     const Auth = cookie.get('Auth');
     if (!Auth) {
