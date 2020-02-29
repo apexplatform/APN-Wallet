@@ -75,8 +75,7 @@ function MoveCoin({
                 <MenuItem value="">
                   <em>Select sender Account</em>
                 </MenuItem>
-                <MenuItem value="rashed">Sender-1</MenuItem>
-                <MenuItem value="rashed01">Sender-2</MenuItem>
+                <MenuItem value="rashed">{userProfile.firstName} {userProfile.fastName}</MenuItem>
               </Select>
             </FormControl>
             <FormControl fullWidth className="mcsInput">
@@ -95,7 +94,6 @@ function MoveCoin({
                   <em>Select reciver Account</em>
                 </MenuItem>
                 <MenuItem value="rashed">{userProfile.firstName} {userProfile.fastName}</MenuItem>
-                <MenuItem value="rashed01">Naoll-2</MenuItem>
               </Select>
             </FormControl>
 

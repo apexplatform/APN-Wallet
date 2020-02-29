@@ -93,7 +93,7 @@ function getTransactionHistory(){
 
       let userProfile = JSON.parse(cookie.get(cookie.get('userEmail')));
   
-      ShardusCryptoUtils.getHistory(ShardusCryptoUtils.getServerUrlAddress(),userProfile.walletAddress).then(function(transactionHistory){
+      ShardusCryptoUtils.getHistory(ShardusCryptoUtils.getServerUrlAddress(),"f27ddd89cb0c1a4002a5cb941f86cfe86e0c9c19ef4244130f11ba3c689ee45a").then(function(transactionHistory){
         WithdrawRow = transactionHistory;
       });
 };

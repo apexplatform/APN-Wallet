@@ -120,7 +120,7 @@ export class SingleWalletWithdraw extends React.Component {
                   className="inputStyleBasic"
                   name="address"
                   value={address}
-                  placeholder="Bitcoin address"
+                  placeholder="STM Address"
                   onChange={this.changeHandler}
                 />
               </FormControl>
@@ -135,7 +135,7 @@ export class SingleWalletWithdraw extends React.Component {
                   className="inputStyleBasic"
                   name="amount"
                   value={amount}
-                  placeholder="Amount in Bits"
+                  placeholder="Amount in USD"
                   onChange={this.changeHandler}
                 />
               </FormControl>

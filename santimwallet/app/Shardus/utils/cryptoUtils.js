@@ -2,7 +2,7 @@ import crypto from 'shardus-crypto-web'
 import moment from 'moment'
 import axios from 'axios'
 axios.defaults.timeout = 100000
-const serverUrlAddress = 'http://52.14.45.125:9001/'
+const serverUrlAddress = 'http://3.19.61.111:9001/'
 //3.20.217.34 
 crypto.initialize('69fa4195670576c0160d660c3be36556ff8d504725be8a59b5a96509e0c994bc')
 
@@ -79,7 +79,7 @@ async function getHistory(serverUrl, accountId) {
   try {
     let {
       data
-    } = await axios.get(`${serverUrl}recent/${accountId}`)
+    } = await axios.get(`${serverUrl}account/${accountId}`)
     return data.txs
   } catch (e) {
     throw e
